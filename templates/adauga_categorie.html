@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Adaugă Categorie</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        form { max-width: 400px; }
+        input { width: 100%; padding: 10px; margin: 5px 0 15px 0; display: block; box-sizing: border-box; }
+        button { background-color: #28a745; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 4px; }
+        a { display: inline-block; margin-top: 15px; text-decoration: none; color: #007bff; }
+    </style>
+</head>
+<body>
+    <h1>Adaugă o Categorie Nouă</h1>
+    <form method="POST">
+        <label>Nume Categorie:</label>
+        <input type="text" name="nume" placeholder="ex: Componente PC" required>
+
+        <button type="submit">Salvează Categoria</button>
+    </form>
+    
+    <a href="{{ url_for('adauga') }}">Înapoi la adăugare produs</a>
+</body>
+</html>

@@ -1,0 +1,1 @@
+CREATE DATABASE depozit_db;

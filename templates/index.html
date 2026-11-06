@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestiune Depozit</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 12px; text-align: left; }
+        th { background-color: #f4f4f4; }
+        .btn { padding: 8px 12px; text-decoration: none; border-radius: 4px; display: inline-block; cursor: pointer; border: none; font-size: 14px; }
+        .btn-add { background-color: #28a745; color: white; margin-bottom: 15px; }
+        .btn-edit { background-color: #ffc107; color: black; }
+        .btn-delete { background-color: #dc3545; color: white; }
+        .action-form { display: inline; }
+    </style>
+</head>
+<body>
+    <h1>Stoc Produse Depozit</h1>
+    <a href="{{ url_for('adauga') }}" class="btn btn-add">+ Adaugă Produs Nou</a>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>SKU</th>
+            <th>Nume Produs</th>
+            <th>Categorie</th>
+            <th>Preț (RON)</th>
+            <th>Acțiuni</th>
+        </tr>
+        {% for produs in produse %}
+        <tr>
+            <td>{{ produs[0] }}</td>
+            <td>{{ produs[1] }}</td>
+            <td>{{ produs[2] }}</td>
+            <td>{{ produs[4] or 'Fără categorie' }}</td>
+            <td>{{ produs[3] }}</td>
+            <td>
+                <!-- Buton Editare -->
+                <a href="{{ url_for('editeaza', id=produs[0]) }}" class="btn btn-edit">Editează</a>
+                
+                <!-- Buton Ștergere -->
+                <form action="{{ url_for('sterge', id=produs[0]) }}" method="POST" class="action-form" onsubmit="return confirm('Ești sigur că vrei să ștergi acest produs?');">
+                    <button type="submit" class="btn btn-delete">Șterge</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

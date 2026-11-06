@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Editează Produs</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        form { max-width: 400px; }
+        input, select { width: 100%; padding: 10px; margin: 5px 0 15px 0; display: block; box-sizing: border-box; }
+        button { background-color: #ffc107; color: black; padding: 10px 20px; border: none; cursor: pointer; border-radius: 4px; font-weight: bold; }
+        a { display: inline-block; margin-top: 15px; text-decoration: none; color: #007bff; }
+        .categorie-box { border: 1px solid #ccc; padding: 10px; border-radius: 5px; background-color: #f9f9f9; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+    <h1>Editează Produsul</h1>
+    <form method="POST">
+        <label>Cod SKU:</label>
+        <input type="text" name="sku" value="{{ produs[1] }}" required>
+
+        <label>Nume Produs:</label>
+        <input type="text" name="nume" value="{{ produs[2] }}" required>
+
+        <div class="categorie-box">
+            <label>Alege o Categorie existentă:</label>
+            <select name="categorie" style="margin-bottom: 10px;">
+                <option value="">-- Fără categorie --</option>
+                {% for cat in categorii %}
+                    <option value="{{ cat[0] }}" {% if produs[4] == cat[0] %}selected{% endif %}>{{ cat[1] }}</option>
+                {% endfor %}
+            </select>
+            
+            <label style="font-weight: bold; font-size: 14px; color: #555;">SAU adaugă tu o categorie nouă:</label>
+            <input type="text" name="categorie_noua" placeholder="ex: Componente PC" style="margin-bottom: 0;">
+        </div>
+
+        <label>Preț Unitar (RON):</label>
+        <input type="number" step="0.01" name="pret" value="{{ produs[3] }}" required>
+
+        <button type="submit">Actualizează Produsul</button>
+    </form>
+    
+    <a href="{{ url_for('index') }}">Înapoi la listă</a>
+</body>
+</html>
